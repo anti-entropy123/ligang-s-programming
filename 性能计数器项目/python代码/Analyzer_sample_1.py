@@ -1,15 +1,14 @@
 from Performance_analyzer import Performance_analyzer
 from time import time
 from OutPutTerminal import OutPut_terminal
-import json 
-class Analyzer_sample_1(Performance_analyzer):
-    _count = 0
-    _response_time: list = []
-    _start_time: float = 0
-    _cache = {}
+import json
 
+class Analyzer_sample_1(Performance_analyzer):    
     def __init__(self):
+        self._count = 0
         self._start_time = time()
+        self._response_time = []
+        self._cache = {}
 
     def before_service(self, key):
         self._count += 1
@@ -22,22 +21,26 @@ class Analyzer_sample_1(Performance_analyzer):
         except KeyError as e:
             print('key error Exception')
     
-    def get_Max_Response_time(self)->float:
+    def get_max_response_time(self)->float:
         return max(self._response_time)
 
-    def get_Min_Response_time(self)->float:
+    def get_min_response_time(self)->float:
         return min(self._response_time)
     
+    def get_avg_response_time(self)->float:
+        return sum(self._response_time)/self._count
+
     def get_tps(self)->float:
-        return len(self._response_time)/(time()-self._start_time)
+        return self._count/(time()-self._start_time)
     
     def get_count(self)->int:
         return self._count
     
     def result2json(self)->str:
         result = {
-            'max_response_time': self.get_Max_Response_time(),
-            'min_response_time': self.get_Min_Response_time(),
+            'max_response_time': self.get_max_response_time(),
+            'min_response_time': self.get_min_response_time(),
+            'avg_response_time': self.get_avg_response_time(),
             'tps': self.get_tps(),
             'count': self.get_count()
         }
@@ -49,4 +52,4 @@ class Analyzer_sample_1(Performance_analyzer):
     def out_put(self, terminal: OutPut_terminal, data: str):
         terminal.out_put(data)
 
-analyzer = Analyzer_sample_1()
+
