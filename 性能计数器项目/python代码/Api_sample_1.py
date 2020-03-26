@@ -6,7 +6,7 @@ class Api_sample_1(Api):
     def __init__(self):
         self.analyzer = analyzer
         # print(self.analyzer)
-        
+
     @proxy(analyzer)
     def service(self):
         return "hello_world"

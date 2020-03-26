@@ -8,5 +8,6 @@ def proxy(analyzer: PA):
             analyzer.before_service(key)
             result = func(*args, **kw)
             analyzer.after_service(key)
+            return result
         return wrapper
     return before

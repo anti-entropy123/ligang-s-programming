@@ -5,20 +5,20 @@ import json
 class Analyzer_sample_1(Performance_analyzer):
     _count = 0
     _response_time: list = []
-    _start_time: double = 0
+    _start_time: float = 0
     _cache = {}
 
     def __init__(self):
         self._start_time = time()
 
     def before_service(self, key):
-        self.count += 1
+        self._count += 1
         self._cache[key] = time()
 
     def after_service(self, key):
         self._response_time.append(time()-self._cache[key])
         try:
-            self._cache.popitem(key)
+            self._cache.pop(key)
         except KeyError as e:
             print('key error Exception')
     
