@@ -1,6 +1,6 @@
 if __name__ == "__main__":
-    from Api_sample_1 import Api_sample_1
-    from Analyzer_sample_1 import Analyzer_sample_1
+    from Api import Api_sample_1
+    from Performance_analyzer import Analyzer_sample_1
 
     analyzer = Analyzer_sample_1()
     api = Api_sample_1(analyzer)

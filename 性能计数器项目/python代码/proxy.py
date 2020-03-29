@@ -1,7 +1,6 @@
-from Performance_analyzer import Performance_analyzer as PA
 from time import time
 
-def proxy(analyzer: PA):
+def proxy(analyzer):
     def before(func):
         def wrapper(*args, **kw):
             key = hash(time())
